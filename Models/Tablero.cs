@@ -1,4 +1,4 @@
-namespace kanban;
+namespace tl2_tp10_2023_FloresHAdrian;
 
 public class Tablero{
     public int Id {get;set;}

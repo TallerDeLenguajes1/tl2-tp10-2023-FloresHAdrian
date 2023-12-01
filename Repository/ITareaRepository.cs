@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace kanban;
+namespace tl2_tp10_2023_FloresHAdrian;
 
 public interface ITareaRepository{
     public  void Create(int idTable,Tarea Tarea);

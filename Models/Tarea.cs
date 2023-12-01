@@ -1,4 +1,4 @@
-namespace kanban;
+namespace tl2_tp10_2023_FloresHAdrian;
 
 public enum EstadoTarea{Ideas, ToDo, Review, Done};
 

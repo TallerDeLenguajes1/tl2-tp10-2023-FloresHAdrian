@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace kanban;
+namespace tl2_tp10_2023_FloresHAdrian;
 public class UsuariosRepository : IUsuariosRepository
 {
     private string cadenaConexion = "Data Source=DB/kanban.db;Cache=Shared";

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using tl2_tp10_2023_FloresHAdrian.Models;
 namespace tl2_tp10_2023_FloresHAdrian.Controllers;
-/*
+
 public class TableroController : Controller
 {
     private readonly ILogger<TableroController> _logger;
@@ -40,7 +40,7 @@ public class TableroController : Controller
 
     [HttpPost]
     public IActionResult Update(Tablero Tablero){
-        tablerosRepository.Update(Tablero.id,Tablero);
+        tablerosRepository.Update(Tablero.Id,Tablero);
         return RedirectToAction("Index");
     }
 
@@ -56,4 +56,3 @@ public class TableroController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
-*/

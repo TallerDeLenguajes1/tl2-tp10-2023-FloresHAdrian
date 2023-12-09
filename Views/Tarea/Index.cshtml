@@ -28,7 +28,7 @@
                     <td>@t.Descripcion</td>
                     <td>@t.Color</td>
                     <td>@t.Estado</td>
-                    <td hidden>@t.IdUsuarioPropietario</td>
+                    <td hidden>@t.IdUsuarioAsignado</td>
                     <td>
                         <a asp-controller="Tarea" asp-action="Update" asp-route-id="@t.Id" class="btn btn-primary">Modificar</a>
                         <a asp-controller="Tarea" asp-action="Delete" asp-route-id="@t.Id" onclick="return confirm('¿Estas seguro que quieres eliminar el elemento?')" class="btn btn-primary">Eliminar</a>  

@@ -2,51 +2,51 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using tl2_tp10_2023_FloresHAdrian.Models;
 namespace tl2_tp10_2023_FloresHAdrian.Controllers;
-
-public class TareaController : Controller
+/*
+public class TableroController : Controller
 {
-    private readonly ILogger<TareaController> _logger;
-    private ITareaRepository tareasRepository;
+    private readonly ILogger<TableroController> _logger;
+    private ITableroRepository tablerosRepository;
 
-    public TareaController(ILogger<TareaController> logger)
+    public TableroController(ILogger<TableroController> logger)
     {
         _logger = logger;
-        tareasRepository = new TareaRepository();
+        tablerosRepository = new TableroRepository();
     }
 
     public IActionResult Index()
     {
-        return View(tareasRepository.GetAllByTableId(1));
+        return View(tablerosRepository.GetAll());
     }
 
     [HttpGet]
     public IActionResult Create() // vista del form para ingresar
     {
-        var tarea = new Tarea();
-        tarea.IdTablero = 1;
-        return View(tarea); //??
+        var tablero = new Tablero();
+        tablero.IdUsuarioPropietario = 99;
+        return View(tablero); //??
     }
 
     [HttpPost]
-    public IActionResult Create(Tarea tarea){
-        tareasRepository.Create(tarea.IdTablero, tarea);
+    public IActionResult Create(Tablero tablero){
+        tablerosRepository.Create(tablero);
         return RedirectToAction("Index");
     }
 
     [HttpGet]
     public IActionResult Update(int id){
-        return View(tareasRepository.GetById(id));
+        return View(tablerosRepository.GetById(id));
     }
 
     [HttpPost]
-    public IActionResult Update(Tarea Tarea){
-        tareasRepository.Update(Tarea.Id , Tarea);
+    public IActionResult Update(Tablero Tablero){
+        tablerosRepository.Update(Tablero.id,Tablero);
         return RedirectToAction("Index");
     }
 
     [HttpGet]
     public IActionResult Delete(int id){
-        tareasRepository.Remove(id);
+        tablerosRepository.Remove(id);
         return RedirectToAction("Index");
     }
 
@@ -56,3 +56,4 @@ public class TareaController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+*/

@@ -31,14 +31,14 @@ public class TareaRepository : ITareaRepository {
 
     public void Update (int id,Tarea  Tarea){
 
-        var query = $"UPDATE Tarea SET id_tablero= @idTable, nombre=@name,estado=@estado, descripcion =@descripcion, color=@color  WHERE id=@id;";
+        var query = $"UPDATE Tarea SET nombre=@name,estado=@estado, descripcion =@descripcion, color=@color  WHERE id=@id;";
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
             connection.Open();
             var command = new SQLiteCommand(query, connection);
 
-            command.Parameters.Add(new SQLiteParameter("@idTable", Tarea.IdTablero));
-            command.Parameters.Add(new SQLiteParameter("@nombre", Tarea.Nombre));
+            //command.Parameters.Add(new SQLiteParameter("@idTable", Tarea.IdTablero));
+            command.Parameters.Add(new SQLiteParameter("@name", Tarea.Nombre));
             command.Parameters.Add(new SQLiteParameter("@estado", Tarea.Estado));
             command.Parameters.Add(new SQLiteParameter("@descripcion", Tarea.Descripcion));
             command.Parameters.Add(new SQLiteParameter("@color", Tarea.Color));
@@ -65,9 +65,15 @@ public class TareaRepository : ITareaRepository {
                     Tarea.Id= Convert.ToInt32(reader["id"]) ;
                     Tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
                     Tarea.Nombre =reader["nombre"].ToString() ;
-                    Tarea.Estado =(EstadoTarea)reader["estado"];
+                    Tarea.Estado =(EstadoTarea)Convert.ToInt32(reader["estado"]);
                     Tarea.Descripcion = reader["descripcion"].ToString();
-                    Tarea.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    if (reader["id_usuario_asignado"] == DBNull.Value)
+                    {
+                        Tarea.IdUsuarioAsignado = 0;   
+                    } else
+                    {
+                        Tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                    }
                     Tarea.Color = reader["color"].ToString();
                 }
             }
@@ -89,7 +95,7 @@ public class TareaRepository : ITareaRepository {
                 while(reader.Read()){
                     var Tarea = new Tarea();
                     Tarea.Id= Convert.ToInt32(reader["id"]) ;
-                    Tarea.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    Tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                     Tarea.Nombre =reader["nombre"].ToString() ;
                     Tarea.Descripcion = reader["descripcion"].ToString();
                     lista.Add(Tarea);
@@ -103,7 +109,7 @@ public class TareaRepository : ITareaRepository {
     }*/
 
     public List<Tarea> GetAllByUserId(int idUsuario){
-        var query = $"SELECT * FROM Tarea WHERE id_usuario_propietario= @idUser;";
+        var query = $"SELECT * FROM Tarea WHERE id_usuario_asignado= @idUser;";
         List<Tarea> lista = new List<Tarea>();
 
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion)){
@@ -117,9 +123,15 @@ public class TareaRepository : ITareaRepository {
                     Tarea.Id= Convert.ToInt32(reader["id"]) ;
                     Tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
                     Tarea.Nombre =reader["nombre"].ToString() ;
-                    Tarea.Estado =(EstadoTarea)reader["estado"];
+                    Tarea.Estado =(EstadoTarea)Convert.ToInt32(reader["estado"]);
                     Tarea.Descripcion = reader["descripcion"].ToString();
-                    Tarea.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    if (reader["id_usuario_asignado"] == DBNull.Value)
+                    {
+                        Tarea.IdUsuarioAsignado = 0;   
+                    } else
+                    {
+                        Tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                    }
                     Tarea.Color = reader["color"].ToString();
                     lista.Add(Tarea);
                 }
@@ -146,9 +158,15 @@ public class TareaRepository : ITareaRepository {
                     Tarea.Id= Convert.ToInt32(reader["id"]) ;
                     Tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
                     Tarea.Nombre =reader["nombre"].ToString() ;
-                    Tarea.Estado =(EstadoTarea)reader["estado"];
+                    Tarea.Estado =(EstadoTarea)Convert.ToInt32(reader["estado"]);
                     Tarea.Descripcion = reader["descripcion"].ToString();
-                    Tarea.IdUsuarioPropietario = Convert.ToInt32(reader["id_usuario_propietario"]);
+                    if (reader["id_usuario_asignado"] == DBNull.Value)
+                    {
+                        Tarea.IdUsuarioAsignado = 0;   
+                    } else
+                    {
+                        Tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
+                    }
                     Tarea.Color = reader["color"].ToString();
                     lista.Add(Tarea);
                 }
@@ -174,7 +192,7 @@ public class TareaRepository : ITareaRepository {
     }
 
     public void AssignUserToTask(int idUser, int idTask){
-        var query = $"UPDATE Tarea SET id_usuario_propietario= @idUserWHERE id=@idTask";
+        var query = $"UPDATE Tarea SET id_usuario_asignado= @idUserWHERE id=@idTask";
         using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
         {
             connection.Open();
